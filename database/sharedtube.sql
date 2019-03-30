@@ -40,3 +40,22 @@ CREATE TABLE VIDEO_PLAYLIST (
 		id_video SERIAL NOT NULL references VIDEOS(id_video),
 	id_playlist SERIAL NOT NULL references PLAYLIST(id_playlist)
 );
+
+CREATE TABLE GROUPS (
+		id_group SERIAL NOT NULL PRIMARY KEY,
+	name	VARCHAR(256) NOT NULL UNIQUE,
+	private BOOLEAN NOT NULL
+
+);
+
+CREATE TABLE GROUP_PLAYLIST (
+		id_group SERIAL NOT NULL references GROUPS(id_group),
+	id_playlist SERIAL NOT NULL references PLAYLIST(id_playlist)
+);
+
+);
+
+CREATE TABLE USERS_GROUP (
+		id_user SERIAL NOT NULL references USERS(id_user),
+		id_group SERIAL NOT NULL references GROUPS(id_group)
+);

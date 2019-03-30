@@ -6,5 +6,12 @@ config.options = {
     'maxResults': '50',
     'part': 'contentDetails, snippet'
 };
+config.search_options = {
+    part: 'snippet',
+    type: 'video',
+    maxResults: 10,
+    safeSearch: 'moderate',
+    videoEmbeddable: true
+};
 
 module.exports = config;
