@@ -24,9 +24,8 @@ CREATE TABLE PLAYLIST (
 );
 
 CREATE TABLE VIDEOS (
-		id_video SERIAL PRIMARY KEY,
+		id_video VARCHAR(1024) PRIMARY KEY,
 	name	VARCHAR(256) NOT NULL,
-		URL	VARCHAR(1024) NOT NULL UNIQUE,
 	thumbnail VARCHAR(1024) NOT NULL
 );
 
@@ -37,7 +36,7 @@ CREATE TABLE USERS_PLAYLIST (
 );
 
 CREATE TABLE VIDEO_PLAYLIST (
-		id_video SERIAL NOT NULL references VIDEOS(id_video),
+		id_video VARCHAR(1024) NOT NULL references VIDEOS(id_video),
 	id_playlist SERIAL NOT NULL references PLAYLIST(id_playlist)
 );
 
