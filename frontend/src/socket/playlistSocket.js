@@ -1,8 +1,8 @@
 import {socket} from './config'
 
-function createPlaylist(name, cb){
+function createPlaylist(name, id_user,  cb){
     socket.on('CREATION', data => cb(null, data) );
-    socket.emit('CREATE_PLAYLIST', name);
+    socket.emit('CREATE_PLAYLIST', name, id_user);
   }
 
   function insertVideoInPlaylist(video, id_playlist, cb){
@@ -15,9 +15,9 @@ function createPlaylist(name, cb){
     socket.emit('GET_PLAYLIST_GROUP', id_group);
   }
 
-  function getUserPlaylist(id_user, cb){
+  function getUserPlaylist(id_user, id_video, cb){
     socket.on('PLAYLIST_USER', data => cb(null, data) );
-    socket.emit('GET_PLAYLIST_USER', id_user);
+    socket.emit('GET_PLAYLIST_USER', id_user, id_video);
   }
 
   function getVideosPlaylist(id_playlist, cb){

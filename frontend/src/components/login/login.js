@@ -36,19 +36,19 @@ class Login extends Component {
     }
   }
 
-  handlePlaylist(event, id_user){
+  /*handlePlaylist(event, id_user){
     getUserPlaylist(id_user, (err, data) => {
       console.log(data);
       this.props.dispatch({ type: 'GET_PLAYLIST_USER', listOfPlaylist: data})
     });
     event.preventDefault();
-  }
+  }*/
 
   async handleSubmit(event) {
     login(this.state.email, this.state.password, (err, data) => {
       console.log(data);
       this.props.dispatch({ type: 'USER_LOGIN', username: data.username, id_user: data.id_user});
-      this.handlePlaylist(event, data.id_user);
+     // this.handlePlaylist(event, data.id_user);
     });
     event.preventDefault();
   }

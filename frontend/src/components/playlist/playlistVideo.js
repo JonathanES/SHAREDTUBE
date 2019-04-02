@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { checkVideoPlaylist, insertVideoInPlaylist, removeVideoOfPlaylist } from '../../socket/playlistSocket';
 import CreatePlaylist from './createPlaylistVideo';
+import { getUserPlaylist } from '../../socket/playlistSocket';
+
 
 const mapStateToProps = state => ({
     selectedVideos: state.video.selectedVideo,
@@ -14,32 +16,29 @@ class Playlist extends Component {
         super();
         this.state = {
             //list saying if a video is in the playlist or not
-            listOfPlaylist: props.listOfPlaylist,
-            createPlaylist: false
+            listOfPlaylist: [],
+            createPlaylist: false,
+            id_video: props.selectedVideos.id
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-
-    /**
-     * when the component is launched, check if the video is part of one of the playlist
-     */
-    async checkIfVideoExistInPlaylist() {
-        const anAsyncFunction = async playlist => {
-            const data = await checkVideoPlaylist(this.props.video.id, playlist.id_playlist);
-            playlist.checked = data;
-            return playlist;
-        }
-
-        const getResult = async () => {
-            return await Promise.all(this.state.listOfPlaylist.map(playlist => anAsyncFunction(playlist)));
-        }
-
-        const result = await getResult()
-        console.log(result);
-        this.setState({ listOfPlaylist: result });
-    }
+    
+    /** when arriving on this component, retrieve the list of playlist
+     *  and see if the video is part of it or not */
     async componentDidMount() {
-        this.checkIfVideoExistInPlaylist();
+        getUserPlaylist(this.props.id_user, this.state.id_video, (err, data) => {
+            console.log(data);
+            this.setState({ listOfPlaylist: data });
+            this.props.dispatch({ type: 'GET_PLAYLIST_USER', listOfPlaylist: data })
+        });
+    }
+    componentDidUpdate() {
+        if (this.props.listOfPlaylist.length != this.state.listOfPlaylist.length)
+            getUserPlaylist(this.props.id_user, this.state.id_video, (err, data) => {
+                console.log(data);
+                this.setState({ listOfPlaylist: data });
+                this.props.dispatch({ type: 'GET_PLAYLIST_USER', listOfPlaylist: data });
+            });
     }
     /**
      * check if a user removed or added a video from a playlist
@@ -81,8 +80,8 @@ class Playlist extends Component {
                         <label htmlFor="playlist-video-name">{playlist.name}</label>
                     </div>
                 )}
-                <input id="create-playlist" type="image" src={require("../../Images/add-button.svg")} onClick={() => this.state.createPlaylist ? this.setState({ createPlaylist: false }) : this.setState({ createPlaylist: true })} />
-                {this.state.displayPlaylist && <CreatePlaylist listOfPlaylist={this.props.listOfPlaylist} video={this.props.selectedVideos} />}
+                <input id="create-playlist-image" type="image" src={require("../../Images/add-button.svg")} onClick={() => this.state.createPlaylist ? this.setState({ createPlaylist: false }) : this.setState({ createPlaylist: true })} />
+                {this.state.createPlaylist && <CreatePlaylist listOfPlaylist={this.props.listOfPlaylist} video={this.props.selectedVideos} />}
             </div>
         );
     }

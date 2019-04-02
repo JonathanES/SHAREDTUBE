@@ -4,8 +4,8 @@ module.exports = function (io) {
  * instantiation of socket.io
  */
     io.on('connection', client => {
-        client.on('CREATE_PLAYLIST', async (name) => {
-            const result = await playlist.createPlaylist(name);
+        client.on('CREATE_PLAYLIST', async (name, id_user) => {
+            const result = await playlist.createPlaylist(name, id_user);
             client.emit('CREATION', result);
         });
         client.on('INSERT_VIDEO_IN_PLAYLIST', async (video, id_playlist) => {
@@ -23,15 +23,15 @@ module.exports = function (io) {
             client.emit('PLAYLIST_GROUP', result);
         });
 
-        client.on('GET_PLAYLIST_USER', async (id_user) => {
-            const result = await playlist.getAllPlaylistUser(id_user);
+        client.on('GET_PLAYLIST_USER', async (id_user, id_video) => {
+            const result = await playlist.getAllPlaylistUser(id_user, id_video);
             client.emit('PLAYLIST_USER', result);
         });
 
-        client.on('CHECK_VIDEO_PLAYLIST', async(id_video, id_playlist) => {
+       /* client.on('CHECK_VIDEO_PLAYLIST', async(id_video, id_playlist) => {
             const result = await playlist.checkVideoInListPlaylist(id_video, id_playlist);
             client.emit('CHECK_PLAYLIST', result);
-        })
+        })*/
 
         client.on('REMOVE_VIDEO_PLAYLIST', async(id_video, id_playlist) => {
             const result = await playlist.removeVideoInPlaylist(id_video, id_playlist);

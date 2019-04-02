@@ -326,6 +326,16 @@ nav {
     font-weight: 600;
     color: white;
 }
+.btn-create{
+    padding: 5px 5px;
+    margin: 20px 0;
+    border: none;
+    background-color: red;
+    border-radius: 5px;
+    font-weight: 600;
+    color: white;
+    right: 0px;
+}
 .btn-img {
     background-color: inherit;
     border: none;
@@ -371,6 +381,7 @@ nav {
 .form-group .form-field {
     margin: 15px 0;
 }
+
 .form-group .form-field label {
     display: inline-block;
     font-weight: 600;
@@ -384,6 +395,34 @@ nav {
     border: solid 1px #999999;
     border-radius: 4px;
     height: 30px;
+    padding: 5px 20px;
+}
+
+/** form create playlist **/
+
+.form-group-create {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.form-group-create .form-field-create {
+    margin: 0px 0;
+}
+
+.form-group-create .form-field-create label {
+    display: inline-block;
+    font-weight: 600;
+    width: 25%;
+    text-align: right;
+    margin-right: 10px;
+}
+.form-group-create .form-field-create input {
+    display: inline-block;
+    width: 50%;
+    border: solid 1px #999999;
+    border-radius: 4px;
+    height: 10px;
     padding: 5px 20px;
 }
 
@@ -633,7 +672,7 @@ hr {
     z-index: 200;
 }
 
-#create-playlist {
+#create-playlist-image {
     height: 5%;
     width: 5%;
     z-index: 200;
@@ -643,31 +682,18 @@ hr {
 .create-playlist {
     display: block;
     background-color: white;
-    width: 50%;
+    width: 12%;
     margin: 100px auto 20px;
     border-radius: 5px;
     -webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.1);
     -moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.1);
     box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.1);
 }
-.create-playlist .create-playlist-header{
-    background-color: #383838;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    color: white;
-    text-align: center;
-    height: 100px;
-}
-.create-playlist .create-playlist-header h1 {
-    padding: 37px 0;
-    font-size: 26px;
-}
 .create-playlist .create-playlist-contain {
-    padding: 30px 0;
     text-align: center;
 }
 
-@media screen and (max-width: 100px) {
+@media screen and (max-width: 50px) {
     .create-playlist {
         width: 100%;
         margin-top: 20px;

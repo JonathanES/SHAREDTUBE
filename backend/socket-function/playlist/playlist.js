@@ -1,5 +1,4 @@
 const client = require('../../config/database');
-const crypto = require('crypto');
 
 function getAllPlaylistGroups(id_group) {
     return new Promise(async (resolve) => {
@@ -12,7 +11,7 @@ function getAllPlaylistGroups(id_group) {
     });
 }
 
-function getAllPlaylistUser(id_user) {
+function getAllPlaylistUser(id_user, id_video) {
     return new Promise(async (resolve) => {
         const query = {
             text: 'SELECT PLAYLIST.id_playlist, name FROM PLAYLIST INNER JOIN USERS_PLAYLIST ON USERS_PLAYLIST.id_playlist = PLAYLIST.id_playlist AND id_user = $1',
@@ -21,8 +20,28 @@ function getAllPlaylistUser(id_user) {
         const result = await client.query(query).catch(err => console.log(err));
         if (result.rowCount === 0)
             resolve([]);
-        else
-            resolve(result.rows);
+        else{
+            let listPlaylist = result.rows;
+            const anAsyncFunction = async playlist => {
+                const checkQuery = {
+                    text: 'SELECT EXISTS (SELECT 1 FROM VIDEO_PLAYLIST WHERE id_video = $1 AND id_playlist = $2)',
+                    values: [id_video, playlist.id_playlist],
+                }
+                const checkResult = await client.query(checkQuery).catch(err => console.log(err));
+                playlist.checked = checkResult.rows[0].exists;
+                return playlist;
+            }
+            const getResult = async () => {
+                return await Promise.all(listPlaylist.map(playlist => anAsyncFunction(playlist)));
+            }
+    
+            listPlaylist = await getResult();
+            /*listPlaylist = listPlaylist.map(async playlist => {
+                
+            })*/            
+            resolve(listPlaylist);
+
+        }
     });
 }
 
@@ -102,13 +121,18 @@ function checkVideo(id_video) {
     });
 }
 
-async function createPlaylist(name) {
+async function createPlaylist(name, id_user) {
     return new Promise(async resolve => {
-        const query = {
-            text: 'INSERT INTO PLAYLIST(name) VALUES($1) RETURNING id_playlist, name',
+        const queryPlaylist = {
+            text: 'INSERT INTO PLAYLIST(name) VALUES($1) RETURNING *',
             values: [name]
         }
-        const result = await client.query(query).catch(err => console.log(err));
+        const resultPlaylist = await client.query(queryPlaylist).catch(err => console.log(err));
+        const queryUser = {
+            text: 'INSERT INTO USERS_PLAYLIST(id_user, id_playlist) VALUES($1,$2) RETURNING id_user, id_playlist;',
+            values: [id_user, resultPlaylist.rows[0].id_playlist]
+        }
+        const result = await client.query(queryUser).catch(err => console.log(err));
         resolve(result.rows[0]);
 
     })
