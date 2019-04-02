@@ -15,9 +15,15 @@ function createPlaylist(name, id_user,  cb){
     socket.emit('GET_PLAYLIST_GROUP', id_group);
   }
 
-  function getUserPlaylist(id_user, id_video, cb){
+  function getUserPlaylist(id_user, cb){
     socket.on('PLAYLIST_USER', data => cb(null, data) );
-    socket.emit('GET_PLAYLIST_USER', id_user, id_video);
+    socket.emit('GET_PLAYLIST_USER', id_user);
+  }
+
+  
+  function getUserPlaylistVideo(id_user, id_video, cb){
+    socket.on('PLAYLIST_USER_VIDEO', data => cb(null, data) );
+    socket.emit('GET_PLAYLIST_USER_VIDEO', id_user, id_video);
   }
 
   function getVideosPlaylist(id_playlist, cb){
@@ -37,4 +43,4 @@ function createPlaylist(name, id_user,  cb){
     socket.emit('REMOVE_VIDEO_PLAYLIST', id_video, id_playlist);
   }
 
-  export {createPlaylist, insertVideoInPlaylist, getGroupPlaylist, getUserPlaylist, getVideosPlaylist, checkVideoPlaylist, removeVideoOfPlaylist};
+  export {createPlaylist, insertVideoInPlaylist, getGroupPlaylist, getUserPlaylist, getUserPlaylistVideo, getVideosPlaylist, checkVideoPlaylist, removeVideoOfPlaylist};

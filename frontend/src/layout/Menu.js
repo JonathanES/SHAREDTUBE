@@ -19,7 +19,7 @@ const Menu = ({ dispatch, connexionDemand, registerDemand})  => (
                     <span></span>
                     <ul id="menu">
                         {connexionDemand && !registerDemand && <a onClick={(e) =>  dispatch({ type: 'USER_CONNEXION_DEMAND'})} id="connect" >Se connecter</a>}
-                        {!registerDemand &&  !connexionDemand && <a onClick={(e) => this.handleClick("account", e)} id="account">Playlists </a>}
+                        {!registerDemand &&  !connexionDemand && <a onClick={(e) => dispatch({ type: 'USER_PLAYLIST_DEMAND'})} id="account">Playlists </a>}
                         {!registerDemand &&  !connexionDemand && <a onClick={(e) => this.handleClick("account", e)} id="account">Friends </a>}
                         {!registerDemand &&  !connexionDemand && <a className="red" onClick={(e) => dispatch({ type: 'USER_LOGOUT'})} id="disconnect">Se déconnecter</a>}
                         {registerDemand &&  !connexionDemand && <a className="red" onClick={(e) =>  dispatch({ type: 'USER_REGISTER_DEMAND'})} id="register">S'inscrire</a>}
@@ -29,7 +29,8 @@ const Menu = ({ dispatch, connexionDemand, registerDemand})  => (
             <img id="logo" src={require("../Images/looptube_logo.svg")} alt="logo" onClick={(e) => this.handleClick("logo", e)} />
             <div className="links">
                 {registerDemand &&  !connexionDemand && <a onClick={(e) =>  dispatch({ type: 'USER_CONNEXION_DEMAND'})} id="connect" >Se connecter</a>}
-                {!registerDemand &&  !connexionDemand && <a onClick={(e) => this.handleClick("account", e)} id="account">Playlists </a>}
+                {!registerDemand &&  !connexionDemand && <a onClick={(e) => dispatch({ type: 'USER_PLAYLIST_DEMAND'})} id="account">Playlists </a>}
+                {!registerDemand &&  !connexionDemand && <a onClick={(e) => dispatch({ type: 'USER_THUMBNAILS_DEMAND'})} id="account">Thumbnails </a>}
                 {!registerDemand &&  !connexionDemand && <a onClick={(e) => this.handleClick("account", e)} id="account">Friends </a>}
                 {!registerDemand &&  !connexionDemand && <a className="red" onClick={(e) => dispatch({ type: 'USER_LOGOUT'})} id="disconnect">Se déconnecter</a>}
                 {!registerDemand &&  connexionDemand && <a className="red" onClick={(e) =>  dispatch({ type: 'USER_REGISTER_DEMAND'})} id="register">S'inscrire</a>}

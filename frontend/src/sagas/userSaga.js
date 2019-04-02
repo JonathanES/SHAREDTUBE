@@ -17,11 +17,23 @@ function* handleConnexionDemand(){
     yield put({type: "CONNEXION_DEMAND"});
 }
 
+function* handlePlaylistDemand(){
+    yield put({type: "PLAYLIST_DEMAND"});
+}
+
+function* handleThumbnailsDemand(){
+    yield put({type: "THUMBNAILS_DEMAND"});
+}
+
 function *userSaga(){
     yield takeEvery('USER_LOGIN', handleLogin);
     yield takeEvery('USER_LOGOUT', handleLogOut);
     yield takeEvery('USER_REGISTER_DEMAND', handleRegisterDemand);
     yield takeEvery('USER_CONNEXION_DEMAND', handleConnexionDemand);
+    yield takeEvery('USER_PLAYLIST_DEMAND', handlePlaylistDemand);
+    yield takeEvery('USER_THUMBNAILS_DEMAND', handleThumbnailsDemand);
+
+
 
 }
 

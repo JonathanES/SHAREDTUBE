@@ -3,15 +3,26 @@ const client = require('../../config/database');
 function getAllPlaylistGroups(id_group) {
     return new Promise(async (resolve) => {
         const query = {
-            text: 'SELECT name, id_playlist FROM PLAYLIST INNER JOIN GROUP_PLAYLIST ON GROYP_PLAYLIST.id_playlist = PLAYLIST.id_playlist AND id_group = $1',
+            text: 'SELECT name, PLAYLIST.id_playlist FROM PLAYLIST INNER JOIN GROUP_PLAYLIST ON GROUP_PLAYLIST.id_playlist = PLAYLIST.id_playlist AND id_group = $1',
             values: [id_group],
         }
         const result = await client.query(query).catch(err => console.log(err));
-        resolve(result.rows[0]);
+        resolve(result.rows);
     });
 }
 
-function getAllPlaylistUser(id_user, id_video) {
+function getAllPlaylistUser(id_user) {
+    return new Promise(async (resolve) => {
+        const query = {
+            text: 'SELECT name, PLAYLIST.id_playlist FROM PLAYLIST INNER JOIN USERS_PLAYLIST ON USERS_PLAYLIST.id_playlist = PLAYLIST.id_playlist AND id_user = $1',
+            values: [id_user],
+        }
+        const result = await client.query(query).catch(err => console.log(err));
+        resolve(result.rows);
+    });
+}
+
+function getAllPlaylistUserVideo(id_user, id_video) {
     return new Promise(async (resolve) => {
         const query = {
             text: 'SELECT PLAYLIST.id_playlist, name FROM PLAYLIST INNER JOIN USERS_PLAYLIST ON USERS_PLAYLIST.id_playlist = PLAYLIST.id_playlist AND id_user = $1',
@@ -143,6 +154,7 @@ module.exports = {
     insertVideoInPlaylist: insertVideoInPlaylist,
     getAllVideosFromPlaylist: getAllVideosFromPlaylist,
     getAllPlaylistUser: getAllPlaylistUser,
+    getAllPlaylistUserVideo: getAllPlaylistUserVideo,
     getAllPlaylistGroups: getAllPlaylistGroups,
     checkVideoInListPlaylist: checkVideoInListPlaylist,
     removeVideoInPlaylist: removeVideoInPlaylist

@@ -13,14 +13,14 @@ class Login extends Component {
       password: '',
       id_user: '',
     };
-    
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(event){
-    this.props.dispatch({ type: 'USER_REGISTER_DEMAND'})
+  handleClick(event) {
+    this.props.dispatch({ type: 'USER_REGISTER_DEMAND' })
   }
 
   handleChange(event) {
@@ -36,19 +36,19 @@ class Login extends Component {
     }
   }
 
-  /*handlePlaylist(event, id_user){
+  handlePlaylist(event, id_user) {
     getUserPlaylist(id_user, (err, data) => {
       console.log(data);
-      this.props.dispatch({ type: 'GET_PLAYLIST_USER', listOfPlaylist: data})
+      this.props.dispatch({ type: 'GET_PLAYLIST_USER', listOfPlaylist: data })
     });
     event.preventDefault();
-  }*/
+  }
 
   async handleSubmit(event) {
     login(this.state.email, this.state.password, (err, data) => {
       console.log(data);
-      this.props.dispatch({ type: 'USER_LOGIN', username: data.username, id_user: data.id_user});
-     // this.handlePlaylist(event, data.id_user);
+      this.props.dispatch({ type: 'USER_LOGIN', username: data.username, id_user: data.id_user });
+      this.handlePlaylist(event, data.id_user);
     });
     event.preventDefault();
   }
@@ -64,7 +64,7 @@ class Login extends Component {
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <div className="form-field">
-                <label htmlFor="email">Email :</label>
+                  <label htmlFor="email">Email :</label>
                   <input id="email" type="text" value={this.state.email} onChange={this.handleChange} />
                 </div>
                 <div className="form-field">

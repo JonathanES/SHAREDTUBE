@@ -23,11 +23,15 @@ module.exports = function (io) {
             client.emit('PLAYLIST_GROUP', result);
         });
 
-        client.on('GET_PLAYLIST_USER', async (id_user, id_video) => {
-            const result = await playlist.getAllPlaylistUser(id_user, id_video);
+        client.on('GET_PLAYLIST_USER', async (id_user) => {
+            const result = await playlist.getAllPlaylistUser(id_user);
             client.emit('PLAYLIST_USER', result);
         });
 
+        client.on('GET_PLAYLIST_USER_VIDEO', async (id_user, id_video) => {
+            const result = await playlist.getAllPlaylistUserVideo(id_user, id_video);
+            client.emit('PLAYLIST_USER_VIDEO', result);
+        });
        /* client.on('CHECK_VIDEO_PLAYLIST', async(id_video, id_playlist) => {
             const result = await playlist.checkVideoInListPlaylist(id_video, id_playlist);
             client.emit('CHECK_PLAYLIST', result);

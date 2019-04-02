@@ -2,7 +2,9 @@ const defaultState = {
   username: '',
   id_user: '',
   registerDemand: false,
-  connexionDemand: true
+  connexionDemand: true,
+  playlistDemand: false,
+  thumbnailsDemand: true
 };
 
 const user = (state = defaultState, action) => {
@@ -33,6 +35,18 @@ const user = (state = defaultState, action) => {
         ...state,
         connexionDemand: true,
         registerDemand: false
+      };
+      case 'PLAYLIST_DEMAND':
+      return {
+        ...state,
+        playlistDemand: true,
+        thumbnailsDemand: false
+      };
+      case 'THUMBNAILS_DEMAND':
+      return {
+        ...state,
+        playlistDemand: false,
+        thumbnailsDemand: true
       };
     default:
       return state;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { checkVideoPlaylist, insertVideoInPlaylist, removeVideoOfPlaylist } from '../../socket/playlistSocket';
 import CreatePlaylist from './createPlaylistVideo';
-import { getUserPlaylist } from '../../socket/playlistSocket';
+import { getUserPlaylistVideo } from '../../socket/playlistSocket';
 
 
 const mapStateToProps = state => ({
@@ -22,11 +22,11 @@ class Playlist extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-    
+
     /** when arriving on this component, retrieve the list of playlist
      *  and see if the video is part of it or not */
     async componentDidMount() {
-        getUserPlaylist(this.props.id_user, this.state.id_video, (err, data) => {
+        getUserPlaylistVideo(this.props.id_user, this.state.id_video, (err, data) => {
             console.log(data);
             this.setState({ listOfPlaylist: data });
             this.props.dispatch({ type: 'GET_PLAYLIST_USER', listOfPlaylist: data })
@@ -34,7 +34,7 @@ class Playlist extends Component {
     }
     componentDidUpdate() {
         if (this.props.listOfPlaylist.length != this.state.listOfPlaylist.length)
-            getUserPlaylist(this.props.id_user, this.state.id_video, (err, data) => {
+            getUserPlaylistVideo(this.props.id_user, this.state.id_video, (err, data) => {
                 console.log(data);
                 this.setState({ listOfPlaylist: data });
                 this.props.dispatch({ type: 'GET_PLAYLIST_USER', listOfPlaylist: data });
