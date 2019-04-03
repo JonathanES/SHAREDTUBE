@@ -4,7 +4,7 @@ import Login from '../components/login/login';
 import CreateAccount from '../components/createAccount/createAccount';
 import Menu from './Menu';
 import Thumbnails from '../components/thumbnails/thumbnails';
-import Video from '../components/videos/videos';
+import Video from '../components/videos/videosThumbnails';
 import PlaylistPage from '../components/playlist/playlistPage';
 
 const mapStateToProps = state => ({

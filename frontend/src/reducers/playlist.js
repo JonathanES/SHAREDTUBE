@@ -1,6 +1,6 @@
 const defaultState = {
     listOfPlaylist: [],
-    currentPlaylist: []
+    //videosOfPlaylist: []
 };
 
 const playlist = (state = defaultState, action) => {
@@ -10,6 +10,11 @@ const playlist = (state = defaultState, action) => {
                 ...state,
                 listOfPlaylist: action.listOfPlaylist
             };
+        /*case 'PLAYLIST_VIDEOS':
+            return {
+                ...state,
+                videosOfPlaylist: action.videosOfPlaylist
+            };*/
         default:
             return state;
     }

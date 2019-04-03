@@ -1,6 +1,4 @@
 const defaultState = {
-    listOfPlaylist: [],
-    currentPlaylist: [],
     thumbnails: [],
     searchedValue: '',
     selectedVideo: '',

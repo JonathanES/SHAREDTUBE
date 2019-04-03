@@ -59,11 +59,11 @@ function getAllPlaylistUserVideo(id_user, id_video) {
 function getAllVideosFromPlaylist(id_playlist) {
     return new Promise(async (resolve) => {
         const query = {
-            text: 'SELECT name, url, thumbnails FROM videos INNER JOIN VIDEO_PLAYLIST ON VIDEO_PLAYLIST.id_video = VIDEO.id_video AND id_playlist = $1',
+            text: 'SELECT VIDEOS.id_video, name, thumbnail FROM videos INNER JOIN VIDEO_PLAYLIST ON VIDEO_PLAYLIST.id_video = VIDEOS.id_video AND id_playlist = $1;',
             values: [id_playlist],
         }
         const result = await client.query(query).catch(err => console.log(err));
-        resolve(result.rows[0]);
+        resolve(result.rows);
     });
 }
 /**
