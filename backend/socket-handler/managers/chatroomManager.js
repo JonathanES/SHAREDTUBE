@@ -22,11 +22,11 @@ module.exports = function (io) {
 
         client.on('USER_SEND_MESSAGE', async (id_group, username, message) => {
             const result = await ChatroomController.setChatHistory(id_group, username, message);
-            client.emit('SEND_MESSAGE', result);
+            client.broadcast.emit('SEND_MESSAGE', result);
         })
 
-        client.on('USER_GET_MESSAGE', async (id_user, id_group) => {
-            const result = await ChatroomController.getChatHistory(id_user, id_group);
+        client.on('USER_GET_MESSAGE', async (id_group) => {
+            const result = await ChatroomController.getChatHistory(id_group);
             client.emit('GET_MESSAGE', result);
         })
     });

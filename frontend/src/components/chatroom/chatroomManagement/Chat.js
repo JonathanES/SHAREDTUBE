@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { getUserGroups, addUserGroup, sendMessage, getMessage } from '../../../socket/chatroomSocket';
+import io from "socket.io-client";
+import { addUserGroup, sendMessage, getMessage } from '../../../socket/chatroomSocket';
 
 const mapStateToProps = state => ({
     username: state.user.username,
@@ -25,21 +26,24 @@ class Chat extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleAddFriend = this.handleAddFriend.bind(this);
         this.handleChange = this.handleChange.bind(this);
+
+        this.socket = io('localhost:8080');
+
+        this.socket.on('SEND_MESSAGE', function (data) {
+            addMessage(data);
+        });
+
+        const addMessage = data => {
+            this.setState({ chatHistory: data });
+        }
     }
 
-    /*async componentDidMount() {
-        getUserGroups(this.state.id_user, (err, data) => {
-            this.setState({ listOfGroups: data });
-            this.props.dispatch({ type: 'GET_GROUPS_USER', listOfGroups: data })
-        });
+    componentWillMount() {
+        getMessage(this.state.selectedGroup.id_group, (err, data) => {
+            this.setState({ chatHistory: data });
+        })
     }
-    componentDidUpdate() {
-        if (this.props.listOfGroups.length != this.state.listOfGroups.length)
-            getUserGroups(this.state.id_user, (err, data) => {
-                this.setState({ listOfGroups: data });
-                this.props.dispatch({ type: 'GET_GROUPS_USER', listOfGroups: data })
-            });
-    }*/
+
 
     handleChange(event) {
         this.setState({ message: event.target.value });

@@ -20,12 +20,13 @@ function createGroup(name, id_user, cb){
     socket.emit('USER_SEND_MESSAGE', id_group, username, message);
   }
 
-  function getMessage(id_group, id_user, cb){
+
+  function getMessage(id_group, cb){
     socket.on('GET_MESSAGE', data => cb(null, data) );
-    socket.emit('USER_GET_MESSAGE', id_group, id_user);
+    socket.emit('USER_GET_MESSAGE', id_group);
   }
 
 
 
 
-  export {createGroup, getUserGroups, addUserGroup, sendMessage, getMessage};
+  export {createGroup, getUserGroups, addUserGroup, sendMessage, getMessage, socket};

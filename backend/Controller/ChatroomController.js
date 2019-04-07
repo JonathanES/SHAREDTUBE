@@ -43,9 +43,9 @@ async function getChatroomList(id_user) {
         });
         //
         list.forEach(singleChatroom => {
-            if (!listOfChatrooms.some(chatroom => chatroom.getIdGroup === singleChatroom.getIdGroup)) 
+            if (!listOfChatrooms.some(chatroom => chatroom.getIdGroup === singleChatroom.getIdGroup))
                 listOfChatrooms.push(singleChatroom);
-        })      
+        })
         resolve(list);
     })
 }
@@ -54,10 +54,10 @@ async function getChatroomList(id_user) {
  * get all the chat history of a group
  * @param {*} id_group 
  */
-function getChatHistory(id_user, id_group) {
+function getChatHistory(id_group) {
     return new Promise(async resolve => {
         const chatroom = listOfChatrooms.find(elt => elt.getIdGroup === id_group)
-        resolve(chatroom.getChatHistory());
+        resolve(chatroom.getChatroomHistory);
     });
 }
 
@@ -70,13 +70,13 @@ function getChatHistory(id_user, id_group) {
 
 function setChatHistory(id_group, username, message) {
     return new Promise(async resolve => {
-         const chatroom = listOfChatrooms.find(elt => elt.getIdGroup === id_group)
+        const chatroom = listOfChatrooms.find(elt => elt.getIdGroup === id_group)
         const history = chatroom.getChatroomHistory;
         history.push({ username, message });
         chatroom.setChatroomHistory = history;
         listOfChatrooms.forEach(elt => {
             if (elt.getIdGroup === id_group)
-                elt = chatroom; 
+                elt = chatroom;
         })
         resolve(chatroom.getChatroomHistory);
     })
