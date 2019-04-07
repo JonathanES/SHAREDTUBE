@@ -4,7 +4,7 @@ import { inscription } from '../../socket/userSocket';
 import { getUserPlaylist } from '../../socket/playlistSocket';
 
 
-class CreateAccount extends Component {
+class Inscription extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -85,7 +85,6 @@ class CreateAccount extends Component {
                 </div>
                 <button type="submit" className="btn uppercase">S'inscrire</button>
               </form>
-              toto
             </div>
             <p className="account-help">Vous avez déjà un compte ? <a onClick={this.handleClick} className="underline red" >Se connecter</a></p>
           </div>
@@ -95,4 +94,4 @@ class CreateAccount extends Component {
   }
 }
 
-export default CreateAccount;
+export default Inscription;

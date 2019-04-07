@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CreateGroup from './chatroomManagement/createChatroom';
+import CreateGroup from './chatroomManagement/CreateChatroom';
 import { getUserGroups } from '../../socket/chatroomSocket';
 import { getListOfFriends, removeFriend } from '../../socket/userSocket';
-import SelectedChatroom from './chatroomManagement/selectedChatroom';
-import AddFriend from './friends/addFriend';
+import SelectedChatroom from './chatroomManagement/SelectedChatroom';
+import AddFriend from './friends/AddFriend';
 
 const mapStateToProps = state => ({
     id_user: state.user.id_user,

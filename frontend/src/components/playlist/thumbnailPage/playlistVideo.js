@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { checkVideoPlaylist, insertVideoInPlaylist, removeVideoOfPlaylist } from '../../socket/playlistSocket';
-import CreatePlaylist from './createPlaylistVideo';
-import { getUserPlaylistVideo } from '../../socket/playlistSocket';
+import { insertVideoInPlaylist, removeVideoOfPlaylist } from '../../../socket/playlistSocket';
+import CreatePlaylist from './CreatePlaylistThumbnailPage';
+import { getUserPlaylistVideo } from '../../../socket/playlistSocket';
 
 
 const mapStateToProps = state => ({
@@ -80,7 +80,7 @@ class Playlist extends Component {
                         <label htmlFor="playlist-video-name">{playlist.name}</label>
                     </div>
                 )}
-                <input id="create-playlist-image" type="image" src={require("../../Images/add-button.svg")} onClick={() => this.state.createPlaylist ? this.setState({ createPlaylist: false }) : this.setState({ createPlaylist: true })} />
+                <input id="create-playlist-image" type="image" src={require("../../../Images/add-button.svg")} onClick={() => this.state.createPlaylist ? this.setState({ createPlaylist: false }) : this.setState({ createPlaylist: true })} />
                 {this.state.createPlaylist && <CreatePlaylist listOfPlaylist={this.props.listOfPlaylist} video={this.props.selectedVideos} />}
             </div>
         );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createPlaylist } from '../../socket/playlistSocket';
-import { getUserPlaylist } from '../../socket/playlistSocket';
+import { createPlaylist } from '../../../socket/playlistSocket';
+import { getUserPlaylist } from '../../../socket/playlistSocket';
 
 const mapStateToProps = state => ({
     id_user: state.user.id_user,

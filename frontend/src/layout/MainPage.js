@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Login from '../components/login/login';
-import CreateAccount from '../components/createAccount/createAccount';
+import Inscription from '../components/inscription/inscription';
 import Menu from './Menu';
 import Thumbnails from '../components/thumbnails/thumbnails';
 import Video from '../components/videos/videosThumbnails';
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 const MainPage = ({ dispatch, connexionDemand, registerDemand, id_user, videoIsSelected, playlistDemand, thumbnailsDemand, friendDemand }) => (
     <div id="wrapper">
         <Menu />
-        {registerDemand && !connexionDemand && <CreateAccount dispatch={dispatch} />}
+        {registerDemand && !connexionDemand && <Inscription dispatch={dispatch} />}
         {connexionDemand && !registerDemand && <Login dispatch={dispatch} />}
         {!registerDemand && !connexionDemand && !playlistDemand && thumbnailsDemand && !friendDemand &&
              <Thumbnails />

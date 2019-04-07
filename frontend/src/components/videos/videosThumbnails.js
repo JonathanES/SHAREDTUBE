@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 import { connect } from 'react-redux';
 import '../../main.css';
-import PlaylistVideo from '../playlist/playlistVideo';
+import PlaylistVideo from '../playlist/thumbnailPage/playlistVideo';
 //import { getUserPlaylist } from '../../socket/playlistSocket';
 
 
