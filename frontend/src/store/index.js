@@ -5,6 +5,7 @@ import reducers from '../reducers';
 import userSaga from '../sagas/userSaga';
 import videoSaga from '../sagas/videoSaga';
 import playlistSaga from '../sagas/playlistSaga';
+import chatroomSaga from '../sagas/chatroomSaga';
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -24,6 +25,6 @@ const enhancer = compose(
 export const store = createStore(reducers, enhancer);
 
 // FIXME: load sagas based on router context
-[userSaga, videoSaga, playlistSaga].map(saga => sagaMiddleware.run(saga));
+[userSaga, videoSaga, playlistSaga, chatroomSaga].map(saga => sagaMiddleware.run(saga));
 
 export default store;

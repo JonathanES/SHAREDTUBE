@@ -4,7 +4,10 @@ const defaultState = {
   registerDemand: false,
   connexionDemand: true,
   playlistDemand: false,
-  thumbnailsDemand: true
+  thumbnailsDemand: true,
+  friendDemand: false,
+  listOfUserConnected: [],
+  listOfFriends: []
 };
 
 const user = (state = defaultState, action) => {
@@ -15,7 +18,8 @@ const user = (state = defaultState, action) => {
         username: action.username,
         id_user: action.id_user,
         connexionDemand: false,
-        registerDemand: false
+        registerDemand: false,
+        listOfUserConnected: defaultState.listOfUserConnected.push(action.username)
       };
       case 'LOGOUT':
       return {
@@ -40,13 +44,27 @@ const user = (state = defaultState, action) => {
       return {
         ...state,
         playlistDemand: true,
-        thumbnailsDemand: false
+        thumbnailsDemand: false,
+        friendDemand: false
       };
       case 'THUMBNAILS_DEMAND':
       return {
         ...state,
         playlistDemand: false,
-        thumbnailsDemand: true
+        thumbnailsDemand: true,
+        friendDemand: false
+      };
+      case 'FRIEND_DEMAND':
+      return {
+        ...state,
+        playlistDemand: false,
+        thumbnailsDemand: false,
+        friendDemand: true
+      };
+      case 'LIST_OF_FRIENDS':
+      return {
+        ...state,
+        listOfFriends: action.listOfFriends
       };
     default:
       return state;

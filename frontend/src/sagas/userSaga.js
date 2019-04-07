@@ -25,6 +25,15 @@ function* handleThumbnailsDemand(){
     yield put({type: "THUMBNAILS_DEMAND"});
 }
 
+
+function* handleFriendDemand(){
+    yield put({type: "FRIEND_DEMAND"});
+}
+
+function* handleListOfFriendsDemand(action){
+    yield put({type: "LIST_OF_FRIENDS", listOfFriends: action.listOfFriends});
+}
+
 function *userSaga(){
     yield takeEvery('USER_LOGIN', handleLogin);
     yield takeEvery('USER_LOGOUT', handleLogOut);
@@ -32,8 +41,8 @@ function *userSaga(){
     yield takeEvery('USER_CONNEXION_DEMAND', handleConnexionDemand);
     yield takeEvery('USER_PLAYLIST_DEMAND', handlePlaylistDemand);
     yield takeEvery('USER_THUMBNAILS_DEMAND', handleThumbnailsDemand);
-
-
+    yield takeEvery('USER_FRIEND_DEMAND', handleFriendDemand);
+    yield takeEvery('USER_LIST_OF_FRIENDS', handleListOfFriendsDemand);
 
 }
 

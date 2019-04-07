@@ -58,3 +58,10 @@ CREATE TABLE USERS_GROUP (
 		id_user SERIAL NOT NULL references USERS(id_user),
 		id_group SERIAL NOT NULL references GROUPS(id_group)
 );
+
+ALTER TABLE users ADD "users_vectors" tsvector;
+CREATE INDEX idx_fts_user_vec ON users USING gin(users_vectors);
+UPDATE 
+    users 
+SET 
+    users_vectors = (to_tsvector(username));

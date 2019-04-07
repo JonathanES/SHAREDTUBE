@@ -36,8 +36,7 @@ button {
 }
 .thumbnail-contain {
     position: absolute;
-    left: 0px;
-    width: 66%;
+    width: 100%;
     z-index: -100;
   }
   
@@ -85,17 +84,17 @@ a:hover {
     color: white;
     margin: 10px 30px;
 }
-.header #search-bar{
+.search-bar{
     vertical-align: top;
     margin: 9px 0 0 30px;
     height: 30px;
     padding: 5px 20px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    border: none;
+    border: solid 1px #383838;
     width: 34%;
 }
-.header #search-button {
+.search-button {
     background-image: url(Images/search.svg);
     background-repeat: no-repeat;
     background-size: 18px;
@@ -247,9 +246,10 @@ nav {
     .header .links {
         display: none;
     }
-    .header #search-bar {
+    .search-bar {
         margin: 9px 0;
         width: 70%;
+        border: black;
     }
     .form-search {
         display: block;
@@ -257,7 +257,7 @@ nav {
     }
 }
 @media screen and (max-width: 450px) {
-    .header #search-bar {
+    .search-bar {
         width: 50%;
     }
 }
@@ -441,8 +441,8 @@ hr {
 }
 .yt-player iframe {
     display: inline-block;
-    width: 900px;
-    height: 506px;
+    width: 700px;
+    height: 406px;
     margin: 40px auto 10px;
 }
 .result-search {
@@ -709,4 +709,139 @@ hr {
         width: 80%;
         text-align: left;
     }
+}
+/** chatroom initial page **/
+#group-column{
+    position: absolute;
+    left: 0%;
+    width: 66%;
+    border-right: 1px solid black;
+    height: 100%;
+}
+#friend-column{
+    position: absolute;
+    width: 34%;
+    right: 0%;
+}
+.list-of-groups {
+    margin-top: 2%;
+    list-style: none;
+}
+
+.list-of-friends {
+    margin-top: 2%;
+    list-style: none;
+}
+
+.list-of-groups li{
+    height: 50px;
+    margin: 25px 50px 25px 0px;
+    border: 1px solid black;
+}
+
+
+#create-group-image {
+    position: absolute;
+    margin-top: 0%;
+    width: 3%;
+    left: 0%; 
+}
+
+#remove-friend-image {
+    width: 3%;
+}
+
+#add-friend-image {
+    position: absolute;
+    width: 6%;
+    right: 0%; 
+}
+/*** chat ***/
+#chatroom-discussion {
+    position: absolute;
+    right: 0px;
+    width: 34%;
+    height: 84%;
+    background-color: #b6701e;
+}
+
+#chatroom-video {
+    position: absolute;
+    left: 0px;
+    width: 66%;
+    height: 84%;
+    background-color: red;
+}
+
+#chatroom-playlist {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 7%;
+    bottom: 0px;
+    background-color: blue;
+}
+
+
+
+#chatroom-discussion-input {
+    position: absolute;
+    vertical-align: top;
+    height: 15px;
+    padding: 5px 20px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
+    width: 86%;
+    bottom: 0%;
+}
+
+#chatroom-discussion-button {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    height: 28px;
+    width: 70px;
+    border: none;
+    background-color: red;
+    vertical-align: top;
+    margin-top: 9px;
+    margin-left: -4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-position-x: 25px;
+    background-position-y: 10px;
+    bottom: 0%;
+    right: 0%;
+}
+
+#chatroom-discussion-choice-playlist{
+    position: absolute;
+    bottom: 0%;
+    width: 3%;
+    right: 0%;
+}
+
+#chatroom-discussion-add-user {
+    position: absolute;
+    width: 5%;
+    right: 0%;
+}
+
+#exit-button {
+    position: absolute;
+    left: 0%;
+    width: 3%;
+    z-index: 100;
+}
+
+/** add friend page **/
+#add-friend{
+    width: 50%;
+    margin: 0 auto;
+}
+
+#btn-add-friend{
+    width: 50%;
+    margin: 0 auto; 
 }

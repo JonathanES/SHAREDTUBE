@@ -1,8 +1,12 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga';
 
-function* handleListOfPlaylist(action){
+function* handleListOfUserPlaylist(action){
     yield put({type: "LIST_OF_PLAYLIST", listOfPlaylist: action.listOfPlaylist});
+}
+
+function* handleGroupPlaylists(action){
+    yield put({type: "PLAYLIST_GROUP", groupPlaylists: action.groupPlaylists});
 }
 
 /*function* handleVideoOfPlaylist(action){
@@ -10,7 +14,9 @@ function* handleListOfPlaylist(action){
 }*/
 
 function *playlistSaga(){
-    yield takeEvery('GET_PLAYLIST_USER', handleListOfPlaylist);  
+    yield takeEvery('GET_PLAYLIST_USER', handleListOfUserPlaylist);  
+    yield takeEvery('GET_PLAYLIST_GROUP', handleListOfUserPlaylist);  
+
    // yield takeEvery('SET_PLAYLIST_VIDEOS', handleVideoOfPlaylist);  
 
 }

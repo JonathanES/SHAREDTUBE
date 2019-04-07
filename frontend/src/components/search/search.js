@@ -19,8 +19,6 @@ class Search extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
-
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
@@ -37,8 +35,8 @@ class Search extends Component {
     render() {
         return (
             <form className="form-search" onSubmit={this.handleSubmit}>
-                <input id="search-bar" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Rechercher une vidéo" />
-                <button type="submit" id="search-button"></button>
+                <input className="search-bar" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Rechercher une vidéo" />
+                <button type="submit" className="search-button"></button>
             </form>
         );
     }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 import { connect } from 'react-redux';
 import '../../main.css';
-import PlaylistVideo from '../playlist/playlistVideo';
 
 const opts = {
   height: '390',
@@ -29,22 +28,20 @@ class Videos extends Component {
       else
         currentIndex = 0;
       const currentId = this.state.videosOfPlaylist[currentIndex].id_video;
-      this.setState({index: currentIndex, currentId: currentId})
+      this.setState({ index: currentIndex, currentId: currentId })
       event.target.playVideo();
       event.data = 1;
     }
   }
   render() {
     return (
-      <div>
-        <div className="yt-player">
-          <YouTube
-            videoId={this.state.currentId}
-            opts={opts}
-            onReady={this._onReady}
-            onStateChange={this._onStateChange}
-          />
-        </div>
+      <div className="yt-player">
+        <YouTube
+          videoId={this.state.currentId}
+          opts={opts}
+          onReady={this._onReady}
+          onStateChange={this._onStateChange}
+        />
       </div>
     );
   }

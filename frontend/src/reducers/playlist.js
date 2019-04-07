@@ -1,5 +1,6 @@
 const defaultState = {
     listOfPlaylist: [],
+    groupPlaylists: []
     //videosOfPlaylist: []
 };
 
@@ -10,11 +11,12 @@ const playlist = (state = defaultState, action) => {
                 ...state,
                 listOfPlaylist: action.listOfPlaylist
             };
-        /*case 'PLAYLIST_VIDEOS':
+        
+        case '"PLAYLIST_GROUP"':
             return {
                 ...state,
-                videosOfPlaylist: action.videosOfPlaylist
-            };*/
+                groupPlaylists: action.groupPlaylists
+            };
         default:
             return state;
     }

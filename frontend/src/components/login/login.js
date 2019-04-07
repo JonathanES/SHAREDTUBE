@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../main.css';
 import { login } from '../../socket/userSocket';
 import { getUserPlaylist } from '../../socket/playlistSocket';
+import {getUserGroups} from '../../socket/chatroomSocket'
 
 
 class Login extends Component {
@@ -44,13 +45,22 @@ class Login extends Component {
     event.preventDefault();
   }
 
+  handleGroups(event, id_user){
+    getUserGroups(id_user, (err, data) => {
+      console.log(data);
+      this.props.dispatch({ type: 'GET_GROUPS_USER', listOfGroups: data })
+    });
+    event.preventDefault();
+  }
+
   async handleSubmit(event) {
+    event.preventDefault();
     login(this.state.email, this.state.password, (err, data) => {
       console.log(data);
       this.props.dispatch({ type: 'USER_LOGIN', username: data.username, id_user: data.id_user });
       this.handlePlaylist(event, data.id_user);
+      this.handleGroups(event, data.id_user);
     });
-    event.preventDefault();
   }
 
   render() {
