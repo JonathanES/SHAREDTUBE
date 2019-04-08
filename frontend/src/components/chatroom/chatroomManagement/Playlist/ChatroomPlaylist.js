@@ -56,11 +56,13 @@ class ChatroomPlaylist extends Component {
 
     handleChange(event) {
         const that = this;
-        this.setState({ selectedPlaylist: event.target.value });
+        const selectedPlaylist = JSON.parse(event.target.value);
+        this.setState({ selectedPlaylist:  selectedPlaylist});
         this.props.dispatch({ type: 'SET_SELECTED_PLAYLIST', selectedPlaylist: event.target.value });
-        getVideosPlaylist(this.state.selectedPlaylist.id_playlist, (err, data) => {
+        getVideosPlaylist(selectedPlaylist.id_playlist, (err, data) => {
             that.setState({ videosOfPlaylist: data });
             that.setState({ displayVideosOfPlaylist: true });
+            this.props.dispatch({ type: 'SET_VIDEOS_OF_PLAYLIST', videosOfPlaylist: data });
         })
     }
 
@@ -82,7 +84,7 @@ class ChatroomPlaylist extends Component {
                     <select value={this.state.selectedPlaylist} onChange={this.handleChange}>
                     <option>Select playlist</option>
                         {this.state.groupPlaylists.map(playlist =>
-                            <option id={playlist.id_playlist} value={playlist.name}>{playlist.name}
+                            <option id={playlist.id_playlist} value={JSON.stringify(playlist)}>{playlist.name}
                             </option>
                         )}
                     </select>

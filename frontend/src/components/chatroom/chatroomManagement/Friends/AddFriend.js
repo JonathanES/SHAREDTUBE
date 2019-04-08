@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getListOfFriends, addFriend, searchUser } from '../../../socket/userSocket';
-import '../../../main.css'
+import { getListOfFriends, addFriend, searchUser } from '../../../../socket/userSocket';
+import '../../../../main.css'
 
 
 const mapStateToProps = state => ({

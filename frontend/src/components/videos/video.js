@@ -24,9 +24,12 @@ class Videos extends Component {
       index: 0
     }
   }
-  componentDidUpdate(prevState){
-    if (prevState.videosOfPlaylist.length != this.props.videosOfPlaylist.length){
-      this.setState({videosOfPlaylist: this.props.videosOfPlaylist, currentId: this.props.videosOfPlaylist[0].id_video});
+  componentDidUpdate(prevState) {
+    if (prevState.videosOfPlaylist.length != this.props.videosOfPlaylist.length) {
+      if (this.props.videosOfPlaylist.length == 0)
+        this.setState({ videosOfPlaylist: this.props.videosOfPlaylist, currentId: '' });
+      else
+        this.setState({ videosOfPlaylist: this.props.videosOfPlaylist, currentId: this.props.videosOfPlaylist[0].id_video });
     }
   }
   _onStateChange = (event) => {
@@ -45,12 +48,14 @@ class Videos extends Component {
   render() {
     return (
       <div className="yt-player">
+        {this.state.currentId.length > 0 && 
         <YouTube
           videoId={this.state.currentId}
           opts={opts}
           onReady={this._onReady}
           onStateChange={this._onStateChange}
         />
+        }
       </div>
     );
   }

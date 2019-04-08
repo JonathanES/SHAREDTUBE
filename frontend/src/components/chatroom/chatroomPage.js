@@ -4,7 +4,7 @@ import CreateGroup from './chatroomManagement/CreateChatroom';
 import { getUserGroups } from '../../socket/chatroomSocket';
 import { getListOfFriends, removeFriend } from '../../socket/userSocket';
 import SelectedChatroom from './chatroomManagement/SelectedChatroom';
-import AddFriend from './friends/AddFriend';
+import AddFriend from './chatroomManagement/Friends/AddFriend';
 
 const mapStateToProps = state => ({
     id_user: state.user.id_user,
