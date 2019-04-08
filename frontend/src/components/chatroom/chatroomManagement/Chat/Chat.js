@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import io from "socket.io-client";
-import { addUserGroup, sendMessage, getMessage } from '../../../socket/chatroomSocket';
+import { addUserGroup, sendMessage, getMessage } from '../../../../socket/chatroomSocket';
 
 const mapStateToProps = state => ({
     username: state.user.username,
@@ -72,7 +72,7 @@ class Chat extends React.Component {
     render() {
         return (
             <div id="chatroom-discussion">
-                <input id="chatroom-discussion-add-user" type="image" src={require("../../../Images/add-button.svg")} onClick={() => this.state.addFriend ? this.setState({ addFriend: false }) : this.setState({ addFriend: true })} />
+                <input id="chatroom-discussion-add-user" type="image" src={require("../../../../Images/add-button.svg")} onClick={() => this.state.addFriend ? this.setState({ addFriend: false }) : this.setState({ addFriend: true })} />
                 {this.state.chatHistory.map(chat =>
                     <li>
                         {chat.username}: {chat.message}
@@ -80,7 +80,7 @@ class Chat extends React.Component {
                 )}
                 {this.state.addFriend &&
                     <ul className="list-of-friends">
-                        <input id="exit-button" type="image" src={require("../../../Images/exit.svg")} onClick={() => this.setState({ addFriend: false })} />
+                        <input id="exit-button" type="image" src={require("../../../../Images/exit.svg")} onClick={() => this.setState({ addFriend: false })} />
                         {this.state.listOfFriends.map(friend =>
                             <li>
                                 <a key={friend.id_user} id={friend.id_user} className="yt-thumbnail" href="#" onClick={(event) => this.handleAddFriend(event)}>

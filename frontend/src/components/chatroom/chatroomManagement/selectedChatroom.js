@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getVideosPlaylist } from '../../../socket/playlistSocket';
 import { getUserGroups, addUserGroup, sendMessage, getMessage } from '../../../socket/chatroomSocket';
-import Chat from './Chat';
-import ChatroomPlaylist from './ChatroomPlaylist';
+import Chat from './Chat/Chat';
+import ChatroomPlaylist from './Playlist/ChatroomPlaylist';
 
 
 const mapStateToProps = state => ({

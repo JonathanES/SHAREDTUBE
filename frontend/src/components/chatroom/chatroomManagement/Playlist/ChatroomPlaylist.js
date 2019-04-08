@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Video from '../../videos/video';
-import CreatePlaylistChatroom from './CreatePlaylistChatroom';
+import Video from '../../../videos/video';
+import CreatePlaylistChatroom from './CreatePlaylistInChatroom';
 import ChatroomPlaylistAddVideo from './ChatroomPlaylistAddVideo';
-import { getVideosPlaylist, getGroupPlaylist, checkVideoPlaylist } from '../../../socket/playlistSocket';
+import { getVideosPlaylist, getGroupPlaylist} from '../../../../socket/playlistSocket';
+
 const mapStateToProps = state => ({
     groupPlaylists: state.playlist.groupPlaylists,
     id_user: state.user.id_user,
@@ -60,7 +61,6 @@ class ChatroomPlaylist extends Component {
         getVideosPlaylist(this.state.selectedPlaylist.id_playlist, (err, data) => {
             that.setState({ videosOfPlaylist: data });
             that.setState({ displayVideosOfPlaylist: true });
-            //this.props.dispatch({ type: 'SET_PLAYLIST_VIDEOS', videosOfPlaylist: data });
         })
     }
 
@@ -75,7 +75,7 @@ class ChatroomPlaylist extends Component {
     render() {
         return (
             <div id="chatroom-video">
-                <input id="chatroom-discussion-add-user" type="image" src={require("../../../Images/add-button.svg")} onClick={() => this.state.addVideo ? this.setState({ addVideo: false }) : this.setState({ addVideo: true })} />
+                <input id="chatroom-discussion-add-user" type="image" src={require("../../../../Images/add-button.svg")} onClick={() => this.state.addVideo ? this.setState({ addVideo: false }) : this.setState({ addVideo: true })} />
                 {!this.state.addVideo && <Video videosOfPlaylist={this.state.videosOfPlaylist} />}
                 {this.state.addVideo && <ChatroomPlaylistAddVideo />}
                 <div id="chatroom-playlist">
@@ -89,7 +89,7 @@ class ChatroomPlaylist extends Component {
                     {
                         (this.state.groupPlaylists[0] !== null) ? '' : this.state.groupPlaylists[0].name
                     }
-                    <input id="chatroom-discussion-choice-playlist" type="image" src={require("../../../Images/playlist.svg")} onClick={() => this.state.createPlaylistGroup ? this.setState({ createPlaylistGroup: false }) : this.setState({ createPlaylistGroup: true })} />
+                    <input id="chatroom-discussion-choice-playlist" type="image" src={require("../../../../Images/playlist.svg")} onClick={() => this.state.createPlaylistGroup ? this.setState({ createPlaylistGroup: false }) : this.setState({ createPlaylistGroup: true })} />
                 </div>
                 {this.state.createPlaylistGroup &&
                     <CreatePlaylistChatroom />

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { insertVideoInPlaylist, removeVideoOfPlaylist, checkVideoPlaylist } from '../../../socket/playlistSocket';
-import { getUserPlaylistVideo } from '../../../socket/playlistSocket';
-import Search from '../../search/search';
-import Thumbnails from '../../thumbnails/thumbnails';
+import { insertVideoInPlaylist, removeVideoOfPlaylist, getUserPlaylistVideo } from '../../../../socket/playlistSocket';
+import Search from '../../../search/search';
 
 const mapStateToProps = state => ({
     selectedVideos: state.video.selectedVideo,
@@ -90,9 +88,9 @@ class ChatroomPlaylistAddVideo extends Component {
                     <div className="search-container">
                         {this.state.thumbnails.map(video =>
                             <a key={video.id} className="yt-thumbnail">
-                                {!video.exists && <input id="chatroom-playlist-add-video" type="image" src={require("../../../Images/add-button.svg")} onClick={() => this.handleClick(video)} />
+                                {!video.exists && <input id="chatroom-playlist-add-video" type="image" src={require("../../../../Images/add-button.svg")} onClick={() => this.handleClick(video)} />
                                 }
-                                {video.exists && <input id="chatroom-playlist-remove-video" type="image" src={require("../../../Images/exit.svg")} onClick={() => this.handleClick(video)} />
+                                {video.exists && <input id="chatroom-playlist-remove-video" type="image" src={require("../../../../Images/exit.svg")} onClick={() => this.handleClick(video)} />
                                 }
                                 <img id={video.id} src={video.url} alt={video.id} onClick={() => this.props.dispatch({ type: 'VIDEO_SELECTED', video })} />
                                 <p> {video.titles}</p>

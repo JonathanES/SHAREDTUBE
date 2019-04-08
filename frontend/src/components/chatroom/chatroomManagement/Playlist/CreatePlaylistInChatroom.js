@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createGroupPlaylist,getGroupPlaylist } from '../../../socket/playlistSocket';
+import { createGroupPlaylist,getGroupPlaylist } from '../../../../socket/playlistSocket';
 
 const mapStateToProps = state => ({
     id_user: state.user.id_user,
