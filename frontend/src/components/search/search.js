@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import '../../main.css';
 import { thumbnails } from '../../socket/videoSocket';
 import { connect } from 'react-redux';
+import { checkVideoPlaylist } from '../../socket/playlistSocket';
+
 
 const mapStateToProps = state => ({
     registerDemand: state.user.registerDemand,
-    connexionDemand: state.user.connexionDemand
+    connexionDemand: state.user.connexionDemand,
+    selectedPlaylist: state.playlist.selectedPlaylist
 });
 
 class Search extends Component {
@@ -24,10 +27,15 @@ class Search extends Component {
     }
 
     handleSubmit(event) {
+        const that = this;
         if (!this.props.registerDemand && !this.props.connexionDemand)
-            thumbnails(this.state.value, (err, data) => {
+            thumbnails(this.state.value, async (err, data) => {
                 console.log(data);
-                this.props.dispatch({ type: 'VIDEO_THUMBNAILS', thumbnails: data, searchedValue: this.state.value })
+                if (typeof that.props.selectedPlaylist.id_playlist !== "undefined")
+                for (let index = 0; index < data.length; index++) {
+                    data[index].exists = await checkVideoPlaylist(data[index].id, that.props.selectedPlaylist.id_playlist);                  
+                }
+                that.props.dispatch({ type: 'VIDEO_THUMBNAILS', thumbnails: data, searchedValue: this.state.value })
             });
         event.preventDefault();
     }

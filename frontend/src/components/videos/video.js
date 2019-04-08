@@ -3,6 +3,10 @@ import YouTube from 'react-youtube';
 import { connect } from 'react-redux';
 import '../../main.css';
 
+const mapStateToProps = state => ({
+  videosOfPlaylist: state.playlist.videosOfPlaylist
+});
+
 const opts = {
   height: '390',
   width: '640',
@@ -16,8 +20,13 @@ class Videos extends Component {
     this.state = {
       //list saying if a video is in the playlist or not
       videosOfPlaylist: props.videosOfPlaylist,
-      currentId: props.videosOfPlaylist[0].id_video,
+      currentId: props.videosOfPlaylist[0] !== null ? '' : props.videosOfPlaylist[0].id_video,
       index: 0
+    }
+  }
+  componentDidUpdate(prevState){
+    if (prevState.videosOfPlaylist.length != this.props.videosOfPlaylist.length){
+      this.setState({videosOfPlaylist: this.props.videosOfPlaylist, currentId: this.props.videosOfPlaylist[0].id_video});
     }
   }
   _onStateChange = (event) => {

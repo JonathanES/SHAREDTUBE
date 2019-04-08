@@ -1,7 +1,8 @@
 const defaultState = {
     listOfPlaylist: [],
-    groupPlaylists: []
-    //videosOfPlaylist: []
+    groupPlaylists: [],
+    selectedPlaylist: '',
+    videosOfPlaylist: []
 };
 
 const playlist = (state = defaultState, action) => {
@@ -12,11 +13,23 @@ const playlist = (state = defaultState, action) => {
                 listOfPlaylist: action.listOfPlaylist
             };
         
-        case '"PLAYLIST_GROUP"':
+        case 'PLAYLIST_GROUP':
             return {
                 ...state,
                 groupPlaylists: action.groupPlaylists
             };
+        case 'SELECTED_PLAYLIST':{
+            return {
+                ...state,
+                selectedPlaylist: action.selectedPlaylist
+            }
+        }
+        case 'VIDEOS_OF_PLAYLIST': {
+            return {
+                ...state,
+                videosOfPlaylist: action.videosOfPlaylist
+            }
+        }
         default:
             return state;
     }

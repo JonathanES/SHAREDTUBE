@@ -8,6 +8,10 @@ module.exports = function (io) {
             const result = await playlist.createPlaylist(name, id_user);
             client.emit('CREATION', result);
         });
+        client.on('CREATE_GROUP_PLAYLIST', async (name, id_user, id_group) => {
+            const result = await playlist.createGroupPlaylist(name, id_user, id_group);
+            client.emit('CREATION_GROUP', result);
+        });
         client.on('INSERT_VIDEO_IN_PLAYLIST', async (video, id_playlist) => {
             const result = await playlist.insertVideoInPlaylist(video, id_playlist);
             client.emit('INSERT_VIDEO', result);
@@ -32,12 +36,12 @@ module.exports = function (io) {
             const result = await playlist.getAllPlaylistUserVideo(id_user, id_video);
             client.emit('PLAYLIST_USER_VIDEO', result);
         });
-       /* client.on('CHECK_VIDEO_PLAYLIST', async(id_video, id_playlist) => {
+        client.on('CHECK_VIDEO_PLAYLIST', async (id_video, id_playlist) => {
             const result = await playlist.checkVideoInListPlaylist(id_video, id_playlist);
             client.emit('CHECK_PLAYLIST', result);
-        })*/
+        })
 
-        client.on('REMOVE_VIDEO_PLAYLIST', async(id_video, id_playlist) => {
+        client.on('REMOVE_VIDEO_PLAYLIST', async (id_video, id_playlist) => {
             const result = await playlist.removeVideoInPlaylist(id_video, id_playlist);
             client.emit('REMOVE_VIDEO_FROM_PLAYLIST', result);
         })

@@ -5,6 +5,11 @@ function createPlaylist(name, id_user,  cb){
     socket.emit('CREATE_PLAYLIST', name, id_user);
   }
 
+  function createGroupPlaylist(name, id_user, id_group, cb){
+    socket.on('CREATION_GROUP', data => cb(null, data) );
+    socket.emit('CREATE_GROUP_PLAYLIST', name, id_user,id_group);
+  }
+
   function insertVideoInPlaylist(video, id_playlist, cb){
     socket.on('INSERT_VIDEO', data => cb(null, data) );
     socket.emit('INSERT_VIDEO_IN_PLAYLIST', video, id_playlist);
@@ -43,4 +48,4 @@ function createPlaylist(name, id_user,  cb){
     socket.emit('REMOVE_VIDEO_PLAYLIST', id_video, id_playlist);
   }
 
-  export {createPlaylist, insertVideoInPlaylist, getGroupPlaylist, getUserPlaylist, getUserPlaylistVideo, getVideosPlaylist, checkVideoPlaylist, removeVideoOfPlaylist};
+  export {createPlaylist, insertVideoInPlaylist, getGroupPlaylist, getUserPlaylist, getUserPlaylistVideo, getVideosPlaylist, checkVideoPlaylist, removeVideoOfPlaylist, createGroupPlaylist};

@@ -97,8 +97,8 @@ async function removeVideoInPlaylist(id_video, id_playlist) {
             text: 'DELETE FROM VIDEO_PLAYLIST WHERE id_video = $1 AND id_playlist = $2',
             values: [id_video, id_playlist]
         }
-        const result = await client.query(query).catch(err => console.log(err));
-        resolve(result.rowCount);
+        await client.query(query).catch(err => console.log(err));
+        resolve({id_video: id_video, id_playlist: id_playlist});
     })
 }
 
@@ -149,8 +149,21 @@ async function createPlaylist(name, id_user) {
     })
 }
 
+async function createGroupPlaylist(name, id_user, id_group){
+    return new Promise(async resolve => {
+        const resultInsert = await createPlaylist(name, id_user);
+        const query = {
+            text: 'INSERT INTO GROUP_PLAYLIST(id_group, id_playlist) VALUES($1,$2) RETURNING id_group, id_playlist;',
+            values: [id_group, resultInsert.id_playlist]
+        }
+        const result = await client.query(query).catch(err => console.log(err));
+        resolve(result.rows[0]);
+    })
+}
+
 module.exports = {
     createPlaylist: createPlaylist,
+    createGroupPlaylist: createGroupPlaylist,
     insertVideoInPlaylist: insertVideoInPlaylist,
     getAllVideosFromPlaylist: getAllVideosFromPlaylist,
     getAllPlaylistUser: getAllPlaylistUser,

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getVideosPlaylist } from '../../../socket/playlistSocket';
 import { getUserGroups, addUserGroup, sendMessage, getMessage } from '../../../socket/chatroomSocket';
-import Video from '../../videos/video';
 import Chat from './Chat';
+import ChatroomPlaylist from './ChatroomPlaylist';
 
 
 const mapStateToProps = state => ({
@@ -91,14 +91,8 @@ class SelectedChatroom extends Component {
     render() {
         return (
             <div>
-                <div id="chatroom-video">
-                    <Video videosOfPlaylist={this.state.videosOfPlaylist} />
-                    <div id="chatroom-playlist">
-                        <input id="chatroom-discussion-choice-playlist" type="image" src={require("../../../Images/playlist.svg")} onClick={() => this.state.displayPlaylist ? this.setState({ displayPlaylist: false }) : this.setState({ displayPlaylist: true })} />
-                    </div>
-                </div>
+                <ChatroomPlaylist/>
                 <Chat />
-
             </div>
         );
     }
