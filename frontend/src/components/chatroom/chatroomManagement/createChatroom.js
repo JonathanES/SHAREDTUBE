@@ -29,12 +29,13 @@ class CreateChatroom extends Component {
     }
     handleSubmit(event) {
         const that = this;
-        createGroup(this.state.groupName, this.state.id_user, (err, data) => {
-            getUserGroups(that.state.id_user, (err, data) => {
-                console.log(data);
-                that.props.dispatch({ type: 'GET_GROUPS_USER', listOfGroups: data })
-              });
-        });
+        if (this.state.groupName.length != 0)
+            createGroup(this.state.groupName, this.state.id_user, (err, data) => {
+                getUserGroups(that.state.id_user, (err, data) => {
+                    console.log(data);
+                    that.props.dispatch({ type: 'GET_GROUPS_USER', listOfGroups: data })
+                });
+            });
         event.preventDefault();
     }
     render() {
