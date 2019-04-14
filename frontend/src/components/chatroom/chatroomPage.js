@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CreateGroup from './chatroomManagement/CreateChatroom';
 import { getUserGroups } from '../../socket/chatroomSocket';
 import { getListOfFriends, removeFriend } from '../../socket/userSocket';
+import CreateGroup from './chatroomManagement/CreateChatroom';
 import SelectedChatroom from './chatroomManagement/SelectedChatroom';
 import AddFriend from './chatroomManagement/Friends/AddFriend';
 
