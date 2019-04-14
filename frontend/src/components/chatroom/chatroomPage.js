@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getUserGroups } from '../../socket/chatroomSocket';
 import { getListOfFriends, removeFriend } from '../../socket/userSocket';
-import CreateGroup from './chatroomManagement/CreateChatroom';
+import CreateGroup from './chatroomManagement/ChatroomCreation'
 import SelectedChatroom from './chatroomManagement/SelectedChatroom';
 import AddFriend from './chatroomManagement/Friends/AddFriend';
 
