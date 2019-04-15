@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getUserGroups } from '../../socket/chatroomSocket';
 import { getListOfFriends, removeFriend } from '../../socket/userSocket';
 import CreateGroup from './chatroomManagement/ChatroomCreation'
-import SelectedChatroom from './chatroomManagement/SelectedChatroom';
+import SelectedChatroom from './chatroomManagement/ChatroomSelected';
 import AddFriend from './chatroomManagement/Friends/AddFriend';
 
 const mapStateToProps = state => ({
