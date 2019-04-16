@@ -22,11 +22,18 @@ function addFriend(id_user, id_friend) {
     return new Promise(async (resolve) => {
         const check = await checkIfFriends(id_user, id_friend);
         if (!check) {
+            const friendQuery = {
+                text: 'INSERT INTO FRIENDS(id_user, id_friend) VALUES($1,$2) RETURNING *',
+                values: [id_friend, id_user],
+            }
+            await client.query(friendQuery).catch(err => console.log(err));
+
             const query = {
                 text: 'INSERT INTO FRIENDS(id_user, id_friend) VALUES($1,$2) RETURNING *',
                 values: [id_user, id_friend],
             }
             const result = await client.query(query).catch(err => console.log(err));
+            
             resolve(result.rows[0]);
 
         }
