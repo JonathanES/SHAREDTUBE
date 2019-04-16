@@ -64,6 +64,17 @@ function getListOfFriends(id_user) {
     })
 }
 
+/*function getListOfFriendsNotGroup(id_user){
+    return new Promise(async (resolve) => {
+        const query = {
+            text: 'SELECT username, users.id_user FROM USERS INNER JOIN USERS_GROUP',
+            values: [id_user]
+        }
+        const result = await client.query(query).catch(err => console.log(err));
+        resolve(result.rows);
+    })
+}*/
+
 function getSingleUser(email, password) {
     return new Promise(async (resolve) => {
         password = crypto.createHash('sha256').update(password).digest('base64');
