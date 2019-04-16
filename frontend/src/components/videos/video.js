@@ -20,7 +20,7 @@ class Videos extends Component {
     this.state = {
       //list saying if a video is in the playlist or not
       videosOfPlaylist: props.videosOfPlaylist,
-      currentId: props.videosOfPlaylist[0] !== null ? '' : props.videosOfPlaylist[0].id_video,
+      currentId: typeof props.videosOfPlaylist[0] !== 'undefined' ? props.videosOfPlaylist[0].id_video : '',
       index: 0
     }
   }
