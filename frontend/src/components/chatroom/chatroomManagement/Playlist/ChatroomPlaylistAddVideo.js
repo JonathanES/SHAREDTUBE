@@ -58,8 +58,9 @@ class ChatroomPlaylistAddVideo extends Component {
      */
     handleClick(video) {
         const that = this;
+        const selectedPlaylist = JSON.parse(this.props.selectedPlaylist);
         if (!video.exists) {
-            insertVideoInPlaylist(video, this.props.selectedPlaylist.id_playlist, async (err, data) => {
+            insertVideoInPlaylist(video, selectedPlaylist.id_playlist, async (err, data) => {
                 console.log(data);
                 const thumbnail = this.state.thumbnails;
                 const index = thumbnail.findIndex(video => video.id == data.id_video);

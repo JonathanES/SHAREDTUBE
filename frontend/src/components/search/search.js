@@ -31,9 +31,12 @@ class Search extends Component {
         if (!this.props.registerDemand && !this.props.connexionDemand)
             thumbnails(this.state.value, async (err, data) => {
                 console.log(data);
-                if (typeof that.props.selectedPlaylist.id_playlist !== "undefined")
-                for (let index = 0; index < data.length; index++) {
-                    data[index].exists = await checkVideoPlaylist(data[index].id, that.props.selectedPlaylist.id_playlist);                  
+                if (that.props.selectedPlaylist.length > 0) {
+                    const selectedPlaylist = JSON.parse(that.props.selectedPlaylist);
+                    if (typeof selectedPlaylist.id_playlist !== "undefined")
+                        for (let index = 0; index < data.length; index++) {
+                            data[index].exists = await checkVideoPlaylist(data[index].id, that.props.selectedPlaylist.id_playlist);
+                        }
                 }
                 that.props.dispatch({ type: 'VIDEO_THUMBNAILS', thumbnails: data, searchedValue: this.state.value })
             });
