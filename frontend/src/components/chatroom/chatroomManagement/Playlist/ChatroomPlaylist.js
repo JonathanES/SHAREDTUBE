@@ -58,7 +58,7 @@ class ChatroomPlaylist extends Component {
         const that = this;
         const selectedPlaylist = JSON.parse(event.target.value);
         this.setState({ selectedPlaylist:  selectedPlaylist});
-        this.props.dispatch({ type: 'SET_SELECTED_PLAYLIST', selectedPlaylist: event.target.value });
+        this.props.dispatch({ type: 'SET_SELECTED_PLAYLIST', selectedPlaylist: selectedPlaylist });
         getVideosPlaylist(selectedPlaylist.id_playlist, (err, data) => {
             that.setState({ videosOfPlaylist: data });
             that.setState({ displayVideosOfPlaylist: true });
@@ -81,8 +81,7 @@ class ChatroomPlaylist extends Component {
                 {!this.state.addVideo && <Video videosOfPlaylist={this.state.videosOfPlaylist} />}
                 {this.state.addVideo && <ChatroomPlaylistAddVideo />}
                 <div id="chatroom-playlist">
-                    <select value={this.state.selectedPlaylist} onChange={this.handleChange}>
-                    <option>Select playlist</option>
+                    <select value={this.state.selectedPlaylist.name} onChange={this.handleChange}>
                         {this.state.groupPlaylists.map(playlist =>
                             <option id={playlist.id_playlist} value={JSON.stringify(playlist)}>{playlist.name}
                             </option>
