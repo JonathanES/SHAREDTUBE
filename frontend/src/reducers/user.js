@@ -6,6 +6,7 @@ const defaultState = {
   playlistDemand: false,
   thumbnailsDemand: true,
   friendDemand: false,
+  createGroup: false,
   listOfUserConnected: [],
   listOfFriends: []
 };
@@ -60,6 +61,11 @@ const user = (state = defaultState, action) => {
         playlistDemand: false,
         thumbnailsDemand: false,
         friendDemand: true
+      };
+      case 'CREATE_GROUP_DEMAND':
+      return {
+        ...state,
+        createGroup: !state.createGroup
       };
       case 'LIST_OF_FRIENDS':
       return {

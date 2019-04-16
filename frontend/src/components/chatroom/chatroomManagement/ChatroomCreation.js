@@ -33,9 +33,10 @@ class CreateChatroom extends Component {
             createGroup(this.state.groupName, this.state.id_user, (err, data) => {
                 getUserGroups(that.state.id_user, (err, data) => {
                     console.log(data);
-                    that.props.dispatch({ type: 'GET_GROUPS_USER', listOfGroups: data })
+                    that.props.dispatch({ type: 'GET_GROUPS_USER', listOfGroups: data });
                 });
             });
+        that.props.dispatch({type: 'USER_CREATE_GROUP_DEMAND'});
         event.preventDefault();
     }
     render() {

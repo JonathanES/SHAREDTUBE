@@ -9,7 +9,8 @@ import AddFriend from './chatroomManagement/Friends/AddFriend';
 const mapStateToProps = state => ({
     id_user: state.user.id_user,
     listOfGroups: state.chatroom.listOfGroups,
-    listOfFriends: state.user.listOfFriends
+    listOfFriends: state.user.listOfFriends,
+    createGroup: state.user.createGroup
 });
 
 class ChatroomPage extends Component {
@@ -18,7 +19,7 @@ class ChatroomPage extends Component {
         this.state = {
             //list saying if a video is in the playlist or not
             listOfGroups: props.listOfGroups,
-            createGroup: false,
+            createGroup: props.createGroup,
             id_user: props.id_user,
             chatroomIsSelected: false,
             listOfFriends: props.listOfFriends,
@@ -54,6 +55,9 @@ class ChatroomPage extends Component {
                 that.setState({ listOfFriends: data });
                 that.props.dispatch({ type: 'USER_LIST_OF_FRIENDS', listOfFriends: data })
             });
+        if (this.props.createGroup != this.state.createGroup){
+            this.setState({createGroup: this.props.createGroup});
+        }
     }
 
     handleRemoveFriend(id_friend){
@@ -74,11 +78,6 @@ class ChatroomPage extends Component {
     handleClick(event, group) {
         this.setState({ chatroomIsSelected: true });
         this.props.dispatch({type: 'USER_SELECTED_GROUP', selectedGroup: group});
-        /*getVideosPlaylist(id_playlist, (err, data) => {
-            this.setState({ videosOfPlaylist: data });
-            this.setState({ displayVideosOfPlaylist: true });
-            //this.props.dispatch({ type: 'SET_PLAYLIST_VIDEOS', videosOfPlaylist: data });
-        })*/
         event.preventDefault();
     }
     render() {
@@ -87,7 +86,7 @@ class ChatroomPage extends Component {
                 {!this.state.createGroup && !this.state.chatroomIsSelected && !this.state.addFriend &&
                     <div>
                         <div id="group-column">
-                            <input id="create-group-image" type="image" src={require("../../Images/add-button.svg")} onClick={() => this.state.createGroup ? this.setState({ createGroup: false }) : this.setState({ createGroup: true })} />
+                            <input id="create-group-image" type="image" src={require("../../Images/add-button.svg")} onClick={() => this.props.dispatch({type: 'USER_CREATE_GROUP_DEMAND'})} />
                             <ul className="list-of-groups">
                                 {this.state.listOfGroups.map(group =>
                                     <li onClick={(event) => this.handleClick(event, group)}>
@@ -116,7 +115,7 @@ class ChatroomPage extends Component {
                 }
                 {this.state.createGroup && !this.state.chatroomIsSelected && !this.state.addFriend &&
                     <div>
-                        <input id="exit-button" type="image" src={require("../../Images/exit.svg")} onClick={() => this.setState({ createGroup: false })} />
+                        <input id="exit-button" type="image" src={require("../../Images/exit.svg")} onClick={() => this.props.dispatch({type: 'USER_CREATE_GROUP_DEMAND'})} />
                         <CreateGroup />
                     </div>
                 }
