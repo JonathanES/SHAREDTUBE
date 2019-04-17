@@ -36,5 +36,10 @@ module.exports = function (io) {
             const result = await user.removeFriend(id_user, id_friend);
             client.emit('REMOVE_FRIEND', result);
         });
+
+        client.on('USER_FIND_FRIENDS_NOT_IN_GROUP', async(id_group, id_user) => {
+            const result = await user.getListOfFriendsNotInGroup(id_group, id_user);
+            client.emit('FIND_FRIENDS_NOT_IN_GROUP', result);
+        })
     });
 };

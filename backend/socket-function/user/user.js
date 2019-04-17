@@ -52,7 +52,6 @@ function removeFriend(id_user, id_friend) {
             }
             const result = await client.query(query).catch(err => console.log(err));
             resolve(result.rows[0]);
-
         }
         else
             resolve('');
@@ -71,16 +70,28 @@ function getListOfFriends(id_user) {
     })
 }
 
-/*function getListOfFriendsNotGroup(id_user){
+function getListOfFriendsInGroup(id_group, id_user){
     return new Promise(async (resolve) => {
         const query = {
-            text: 'SELECT username, users.id_user FROM USERS INNER JOIN USERS_GROUP',
-            values: [id_user]
+            text: 'SELECT users.id_user, username FROM users INNER JOIN users_group ON users_group.id_user = users.id_user AND id_group = $1 AND users.id_user != $2;',
+            values: [id_group, id_user]
         }
         const result = await client.query(query).catch(err => console.log(err));
         resolve(result.rows);
     })
-}*/
+}
+
+function getListOfFriendsNotInGroup(id_group, id_user){
+    return new Promise(async (resolve) => {
+        const listOfFriendsInGroup = await getListOfFriendsInGroup(id_group, id_user);
+        const listOfFriends = await getListOfFriends(id_user);
+        const result = listOfFriends.filter(friend => {
+            if (!listOfFriendsInGroup.find(elt => {return elt.id_user === friend.id_user}))
+                return friend;
+        })
+        resolve(result)
+    })
+}
 
 function getSingleUser(email, password) {
     return new Promise(async (resolve) => {
@@ -151,5 +162,6 @@ module.exports = {
     getListOfFriends: getListOfFriends,
     addFriend: addFriend,
     removeFriend: removeFriend,
-    searchUser: searchUser
+    searchUser: searchUser,
+    getListOfFriendsNotInGroup: getListOfFriendsNotInGroup
 }

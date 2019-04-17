@@ -30,4 +30,9 @@ function login(email, password, cb){
     socket.emit('USER_REMOVE_FRIEND', id_user, id_friend);
   }
 
-  export {login, inscription, searchUser, getListOfFriends, addFriend, removeFriend};
+  function getListOfFriendsNotInGroup(id_group, id_user, cb){
+    socket.on('FIND_FRIENDS_NOT_IN_GROUP', data => cb(null, data) );
+    socket.emit('USER_FIND_FRIENDS_NOT_IN_GROUP', id_group, id_user);
+  }
+
+  export {login, inscription, searchUser, getListOfFriends, addFriend, removeFriend, getListOfFriendsNotInGroup};

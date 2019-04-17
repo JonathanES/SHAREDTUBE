@@ -2,12 +2,12 @@ import React from "react";
 import { connect } from 'react-redux';
 import io from "socket.io-client";
 import { addUserGroup, sendMessage, getMessage } from '../../../../socket/chatroomSocket';
+import {getListOfFriendsNotInGroup} from '../../../../socket/userSocket';
 
 const mapStateToProps = state => ({
     username: state.user.username,
     id_user: state.user.id_user,
     listOfGroups: state.chatroom.listOfGroups,
-    listOfFriends: state.user.listOfFriends,
     selectedGroup: state.chatroom.selectedGroup
 });
 
@@ -18,7 +18,7 @@ class Chat extends React.Component {
         this.state = {
             id_user: props.id_user,
             username: props.username,
-            listOfFriends: props.listOfFriends,
+            listOfFriends: [],
             selectedGroup: props.selectedGroup,
             message: '',
             chatHistory: []
@@ -41,6 +41,9 @@ class Chat extends React.Component {
     componentWillMount() {
         getMessage(this.state.selectedGroup.id_group, (err, data) => {
             this.setState({ chatHistory: data });
+        })
+        getListOfFriendsNotInGroup(this.state.selectedGroup.id_group, this.state.id_user, (err, data) => {
+            this.setState({listOfFriends: data});
         })
     }
 
